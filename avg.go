@@ -4,6 +4,15 @@ import (
  "sort"
 )
 
+type keyValFloat struct {
+	k int
+	v float32
+}
+type sorterFloat []keyValFloat
+func (a sorterFloat) Len() int           { return len(a) }
+func (a sorterFloat) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a sorterFloat) Less(i, j int) bool { return a[i].v > a[j].v } // descending order
+
 func TrimmedMeanInt(ar []int) int {
 	sort.Ints(ar)
 	a := len(ar)/5
