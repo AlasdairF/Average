@@ -4,14 +4,14 @@ import (
  "sort"
 )
 
-type keyValFloat struct {
+type keyVal struct {
 	k int
-	v float32
+	v int
 }
-type sorterFloat []keyValFloat
-func (a sorterFloat) Len() int           { return len(a) }
-func (a sorterFloat) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a sorterFloat) Less(i, j int) bool { return a[i].v > a[j].v } // descending order
+type sorter []keyVal
+func (a sorter ) Len() int           { return len(a) }
+func (a sorter ) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a sorter ) Less(i, j int) bool { return a[i].v > a[j].v } // descending order
 
 func MeanInt(ar []int) int {
 	var avg int
@@ -62,29 +62,22 @@ func Max(ar []int) (m int) {
 	return
 }
 
-// Returns the value at which the ints jump from low to high value, by highest percentage, then deducts 1 so greater than can be used
-func JumpPoint(ar []int) int {
-	// Remove anything that is 0
-	n := make([]int, len(ar))
-	var count int
-	for i:=0; i<len(ar); i++ {
-		if ar[i]>0 {
-			n[count] = ar[i]
-			count++
-		}
+func Total(ar []int) (n int) {
+	for _, v := range ar {
+		n += v
 	}
-	n = n[0:count]
-	// Sort list by percentage difference
-	a := make(sorterFloat, len(n)-1)
-	for i:=0; i<len(n)-1; i++ {
-		a[i] = keyValFloat{i, float32(n[i+1]) / float32(n[i])}
+	return
+}
+
+// Returns the key & value just after the greatest increase
+func JumpPoint(ar []int) (int, int) {
+	sort.Ints(ar)
+	a := make(sorter, len(ar))
+	var last int
+	for i, v := range ar {
+		a[i] = keyVal{i, v - last}
+		last = v
 	}
 	sort.Sort(a)
-	// If the first jump point is in the latter 2/3 but the second jump point is in the first 1/3 then use the second jump point, but only if its no less than half the size of the first
-	mid := len(n)/3
-	if a[0].k>=mid && a[1].k<mid && a[1].k*2>a[0].k {
-		return n[a[1].k]
-	} else {
-		return n[a[0].k]
-	}
+	return a[0].k, ar[a[0].k]
 }
