@@ -32,21 +32,15 @@ func MeanFloat(ar []float64) float64 {
 func TrimmedMeanInt(ar []int) int {
 	sort.Ints(ar)
 	a := len(ar)/5
-	var avg int
-	for i:=a; i<len(ar)-a; i++ {
-		avg += ar[i]
-	}
-	return avg / (len(ar) - (a*2))
+	ar = ar[a:len(ar)-a]
+	return MeanInt(ar)
 }
 
 func TrimmedMeanFloat(ar []float64) float64 {
 	sort.Float64s(ar)
 	a := len(ar)/5
-	var avg float64
-	for i:=a; i<len(ar)-a; i++ {
-		avg += ar[i]
-	}
-	return avg / float64(len(ar) - (a*2))
+	ar = ar[a:len(ar)-a]
+	return MeanFloat(ar)
 }
 
 func Min(ar []int) int {
