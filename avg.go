@@ -78,6 +78,6 @@ func JumpPoint(ar []int) (int, int) {
 		a[i] = keyVal{i, v - last}
 		last = v
 	}
-	sort.Sort(a)
+	sort.Stable(a)
 	return a[0].k, ar[a[0].k]
 }
