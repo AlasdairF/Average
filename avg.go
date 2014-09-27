@@ -13,6 +13,22 @@ func (a sorterFloat) Len() int           { return len(a) }
 func (a sorterFloat) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a sorterFloat) Less(i, j int) bool { return a[i].v > a[j].v } // descending order
 
+func MeanInt(ar []int) int {
+	var avg int
+	for _, v := range ar {
+		avg += v
+	}
+	return avg / len(ar)
+}
+
+func MeanFloat(ar []float64) float64 {
+	var avg float64
+	for _, v := range ar {
+		avg += v
+	}
+	return avg / float64(len(ar))
+}
+
 func TrimmedMeanInt(ar []int) int {
 	sort.Ints(ar)
 	a := len(ar)/5
