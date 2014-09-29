@@ -32,19 +32,17 @@ func MeanFloat(ar []float64) float64 {
 func TrimmedMeanInt(ar []int) int {
 	sort.Ints(ar)
 	a := len(ar)/5
-	ar = ar[a:len(ar)-a]
-	return MeanInt(ar)
+	return MeanInt(ar[a:len(ar)-a])
 }
 
 func TrimmedMeanFloat(ar []float64) float64 {
 	sort.Float64s(ar)
 	a := len(ar)/5
-	ar = ar[a:len(ar)-a]
-	return MeanFloat(ar)
+	return MeanFloat(ar[a:len(ar)-a])
 }
 
-func Min(ar []int) int {
-	var m = 9223372036854775807
+func MinInt(ar []int) int {
+	var m int = 9223372036854775807
 	for _, v := range ar {
 		if v < m {
 			m = v
@@ -53,7 +51,17 @@ func Min(ar []int) int {
 	return m
 }
 
-func Max(ar []int) (m int) {
+func MinFloat(ar []float64) float64 {
+	var m float64 = 9223372036854775807
+	for _, v := range ar {
+		if v < m {
+			m = v
+		}
+	}
+	return m
+}
+
+func MaxInt(ar []int) (m int) {
 	for _, v := range ar {
 		if v > m {
 			m = v
@@ -62,7 +70,23 @@ func Max(ar []int) (m int) {
 	return
 }
 
-func Total(ar []int) (n int) {
+func MaxFloat(ar []float64) (m float64) {
+	for _, v := range ar {
+		if v > m {
+			m = v
+		}
+	}
+	return
+}
+
+func TotalInt(ar []int) (n int) {
+	for _, v := range ar {
+		n += v
+	}
+	return
+}
+
+func TotalFloat(ar []float64) (n float64) {
 	for _, v := range ar {
 		n += v
 	}
@@ -73,7 +97,7 @@ func Total(ar []int) (n int) {
 func JumpPoint(ar []int) (int, int) {
 	sort.Ints(ar)
 	a := make(sorter, len(ar))
-	var last int
+	last := ar[0]
 	for i, v := range ar {
 		a[i] = keyVal{i, v - last}
 		last = v
