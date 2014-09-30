@@ -36,6 +36,58 @@ func MeanFloat(ar []float64) float64 {
 	return avg / float64(len(ar))
 }
 
+func MedianInt(ar []int) int {
+	if len(ar) == 0 {
+		return 0
+	}
+	sort.Ints(ar)
+	return ar[len(ar)/2]
+}
+
+func MedianFloat(ar []float64) float64 {
+	if len(ar) == 0 {
+		return 0
+	}
+	sort.Float64s(ar)
+	return ar[len(ar)/2]
+}
+
+func ModeInt(ar []int) int {
+	if len(ar) == 0 {
+		return 0
+	}
+	mc := make(map[int]bool)
+	for _, v := range ar {
+		mc[v]++
+	}
+	var best, mode int
+	for i, v := range mc {
+		if v > m {
+			best = v
+			mode = i
+		}
+	}
+	return mode
+}
+
+func ModeFloat(ar []float64) float64 {
+	if len(ar) == 0 {
+		return 0
+	}
+	mc := make(map[float64]bool)
+	for _, v := range ar {
+		mc[v]++
+	}
+	var best, mode float64
+	for i, v := range mc {
+		if v > m {
+			best = v
+			mode = i
+		}
+	}
+	return mode
+}
+
 func TrimmedMeanInt(ar []int) int {
 	sort.Ints(ar)
 	a := len(ar)/5
