@@ -14,6 +14,9 @@ func (a sorter ) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a sorter ) Less(i, j int) bool { return a[i].v > a[j].v } // descending order
 
 func MeanInt(ar []int) int {
+	if len(ar) == 0 {
+		return 0
+	}
 	var avg int
 	for _, v := range ar {
 		avg += v
@@ -22,6 +25,9 @@ func MeanInt(ar []int) int {
 }
 
 func MeanFloat(ar []float64) float64 {
+	if len(ar) == 0 {
+		return 0
+	}
 	var avg float64
 	for _, v := range ar {
 		avg += v
@@ -42,6 +48,9 @@ func TrimmedMeanFloat(ar []float64) float64 {
 }
 
 func MinInt(ar []int) int {
+	if len(ar) == 0 {
+		return 0
+	}
 	var m int = 9223372036854775807
 	for _, v := range ar {
 		if v < m {
@@ -52,6 +61,9 @@ func MinInt(ar []int) int {
 }
 
 func MinFloat(ar []float64) float64 {
+	if len(ar) == 0 {
+		return 0
+	}
 	var m float64 = 9223372036854775807
 	for _, v := range ar {
 		if v < m {
@@ -95,6 +107,9 @@ func TotalFloat(ar []float64) (n float64) {
 
 // Returns the key & value just after the greatest increase
 func JumpPoint(ar []int) (int, int) {
+	if len(ar) == 0 {
+		return 0, 0
+	}
 	sort.Ints(ar)
 	a := make(sorter, len(ar))
 	last := ar[0]
