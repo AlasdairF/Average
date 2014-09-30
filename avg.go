@@ -60,9 +60,10 @@ func ModeInt(ar []int) int {
 	for _, v := range ar {
 		mc[v]++
 	}
-	var best, mode int
+	var mode int
+	var best uint32
 	for i, v := range mc {
-		if v > m {
+		if v > best {
 			best = v
 			mode = i
 		}
@@ -78,9 +79,10 @@ func ModeFloat(ar []float64) float64 {
 	for _, v := range ar {
 		mc[v]++
 	}
-	var best, mode float64
+	var mode float64
+	var best uint32
 	for i, v := range mc {
-		if v > m {
+		if v > best {
 			best = v
 			mode = i
 		}
