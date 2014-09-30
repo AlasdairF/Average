@@ -56,7 +56,7 @@ func ModeInt(ar []int) int {
 	if len(ar) == 0 {
 		return 0
 	}
-	mc := make(map[int]bool)
+	mc := make(map[int]uint32)
 	for _, v := range ar {
 		mc[v]++
 	}
@@ -74,7 +74,7 @@ func ModeFloat(ar []float64) float64 {
 	if len(ar) == 0 {
 		return 0
 	}
-	mc := make(map[float64]bool)
+	mc := make(map[float64]uint32)
 	for _, v := range ar {
 		mc[v]++
 	}
