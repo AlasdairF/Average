@@ -2,6 +2,7 @@ package avg
 
 import (
  "sort"
+ "math"
 )
 
 type keyVal struct {
@@ -91,18 +92,30 @@ func MaxFloat(ar []float64) (m float64) {
 	return
 }
 
-func TotalInt(ar []int) (n int) {
+func SumInt(ar []int) (n int) {
 	for _, v := range ar {
 		n += v
 	}
 	return
 }
 
-func TotalFloat(ar []float64) (n float64) {
+func SumFloat(ar []float64) (n float64) {
 	for _, v := range ar {
 		n += v
 	}
 	return
+}
+
+func StdDev(a []float64) (float64, float64) {
+	diffSquareMean := make([]float64, len(a))
+	mean := MeanFloat(a)
+	var d float64
+	for i, v := range a {
+		d = v-mean
+		diffSquareMean[i] = d*d
+	}
+	stddev := math.Sqrt(MeanFloat(diffSquareMean))
+	return stddev, mean
 }
 
 // Returns the key & value just after the greatest increase
