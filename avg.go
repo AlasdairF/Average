@@ -91,15 +91,33 @@ func ModeFloat(ar []float64) float64 {
 }
 
 func TrimmedMeanInt(ar []int) int {
-	sort.Ints(ar)
-	a := len(ar)/5
-	return MeanInt(ar[a:len(ar)-a])
+	newar := make([]int, len(ar))
+	var l int
+	for _, v := range ar {
+		if v > 0 {
+			newar[l] = v
+			l++
+		}
+	}
+	newar = newar[0:l]
+	sort.Ints(newar)
+	a := l/5
+	return MeanInt(newar[a:l-a])
 }
 
 func TrimmedMeanFloat(ar []float64) float64 {
-	sort.Float64s(ar)
-	a := len(ar)/5
-	return MeanFloat(ar[a:len(ar)-a])
+	newar := make([]float64, len(ar))
+	var l int
+	for _, v := range ar {
+		if v > 0 {
+			newar[l] = v
+			l++
+		}
+	}
+	newar = newar[0:l]
+	sort.Float64s(newar)
+	a := l/5
+	return MeanFloat(newar[a:l-a])
 }
 
 func MinInt(ar []int) int {
