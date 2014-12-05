@@ -41,7 +41,7 @@ func MedianInt(ar []int) int {
 		return 0
 	}
 	sort.Ints(ar)
-	return ar[len(ar)/2]
+	return ar[len(ar) / 2]
 }
 
 func MedianFloat(ar []float64) float64 {
@@ -49,7 +49,7 @@ func MedianFloat(ar []float64) float64 {
 		return 0
 	}
 	sort.Float64s(ar)
-	return ar[len(ar)/2]
+	return ar[len(ar) / 2]
 }
 
 func ModeInt(ar []int) int {
@@ -101,7 +101,7 @@ func TrimmedMeanInt(ar []int) int {
 	}
 	newar = newar[0:l]
 	sort.Ints(newar)
-	a := l/5
+	a := l / 5
 	return MeanInt(newar[a:l-a])
 }
 
@@ -116,7 +116,7 @@ func TrimmedMeanFloat(ar []float64) float64 {
 	}
 	newar = newar[0:l]
 	sort.Float64s(newar)
-	a := l/5
+	a := l / 5
 	return MeanFloat(newar[a:l-a])
 }
 
@@ -179,14 +179,13 @@ func SumFloat(ar []float64) (n float64) {
 }
 
 func StdDev(a []float64) (float64, float64) {
-	diffSquareMean := make([]float64, len(a))
 	mean := MeanFloat(a)
 	var d float64
 	for i, v := range a {
-		d = v-mean
-		diffSquareMean[i] = d*d
+		v -= mean
+		d += v * v
 	}
-	stddev := math.Sqrt(MeanFloat(diffSquareMean))
+	stddev := math.Sqrt(d / float64(len(a)))
 	return stddev, mean
 }
 
