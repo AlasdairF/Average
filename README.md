@@ -1,6 +1,6 @@
 ##Average
 
-Highly optimized functions for averages.
+Highly optimized functions for statistical analysis. `TrimmedMeanInt` is particularly useful.
 
 ##Index
 
