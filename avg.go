@@ -181,7 +181,7 @@ func SumFloat(ar []float64) (n float64) {
 func StdDev(a []float64) (float64, float64) {
 	mean := MeanFloat(a)
 	var d float64
-	for i, v := range a {
+	for _, v := range a {
 		v -= mean
 		d += v * v
 	}
