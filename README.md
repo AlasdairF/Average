@@ -1,6 +1,12 @@
 ##Average
 
-Highly optimized functions for statistical analysis. `TrimmedMeanInt` is particularly useful.
+Highly optimized functions for statistical analysis.
+
+StdDev returns both standard deviation and mean, just in case the mean is useful. The standard deviation function is extremely highly optimized.
+
+`TrimmedMeanInt` is particularly useful for when a real-world average is needed.
+
+JumpPoint returns the original index and value at the point of greatest increase. This was originally developed while writing Frankenstein DBR in an effort to separate pages into two groups depending on their level of content, but in the end it wasn't used.
 
 ##Index
 
