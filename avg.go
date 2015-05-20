@@ -1,18 +1,11 @@
 package avg
 
 import (
- "sort"
+ "github.com/AlasdairF/Sort/Float64"
+ "github.com/AlasdairF/Sort/Int"
+ "github.com/AlasdairF/Sort/IntInt"
  "math"
 )
-
-type keyVal struct {
-	k int
-	v int
-}
-type sorter []keyVal
-func (a sorter ) Len() int           { return len(a) }
-func (a sorter ) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a sorter ) Less(i, j int) bool { return a[i].v > a[j].v } // descending order
 
 func MeanInt(ar []int) int {
 	if len(ar) == 0 {
@@ -40,7 +33,7 @@ func MedianInt(ar []int) int {
 	if len(ar) == 0 {
 		return 0
 	}
-	sort.Ints(ar)
+	sortInt.Asc(ar)
 	return ar[len(ar) / 2]
 }
 
@@ -48,7 +41,7 @@ func MedianFloat(ar []float64) float64 {
 	if len(ar) == 0 {
 		return 0
 	}
-	sort.Float64s(ar)
+	sortFloat64.Asc(ar)
 	return ar[len(ar) / 2]
 }
 
@@ -100,7 +93,7 @@ func TrimmedMeanInt(ar []int) int {
 		}
 	}
 	newar = newar[0:l]
-	sort.Ints(newar)
+	sortInt.Asc(newar)
 	a := l / 5
 	return MeanInt(newar[a:l-a])
 }
@@ -115,7 +108,7 @@ func TrimmedMeanFloat(ar []float64) float64 {
 		}
 	}
 	newar = newar[0:l]
-	sort.Float64s(newar)
+	sortFloat64.Asc(newar)
 	a := l / 5
 	return MeanFloat(newar[a:l-a])
 }
@@ -194,13 +187,13 @@ func JumpPoint(ar []int) (int, int) {
 	if len(ar) == 0 {
 		return 0, 0
 	}
-	sort.Ints(ar)
-	a := make(sorter, len(ar))
+	sortInt.Asc(ar)
+	a := make([]sortIntInt.KeyVal, len(ar))
 	last := ar[0]
 	for i, v := range ar {
-		a[i] = keyVal{i, v - last}
+		a[i] = sortIntInt.KeyVal{i, v - last}
 		last = v
 	}
-	sort.Stable(a)
+	sortIntInt.StableDesc(a)
 	return a[0].k, ar[a[0].k]
 }
