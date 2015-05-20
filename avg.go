@@ -195,5 +195,5 @@ func JumpPoint(ar []int) (int, int) {
 		last = v
 	}
 	sortIntInt.StableDesc(a)
-	return a[0].k, ar[a[0].k]
+	return a[0].K, ar[a[0].K]
 }
